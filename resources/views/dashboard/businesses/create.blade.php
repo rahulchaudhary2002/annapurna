@@ -77,7 +77,7 @@
                         <label>Phone Number</label>
                         <input type="text" name="phone" value="{{ old('phone') }}"
                                class="dash-form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                               placeholder="+977 98XXXXXXXX">
+                               placeholder="+977 98XXXXXXXX" maxlength="30">
                         @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
