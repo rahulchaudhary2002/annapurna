@@ -1,0 +1,85 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: annapurna_app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    ports:
+      - "9004:9003"
+    depends_on:
+      - db
+      - redis
+
+  nginx:
+    image: nginx:latest
+    container_name: annapurna_nginx
+    ports:
+      - "9090:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: annapurna_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: annapurna_cms
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: annapurna_user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3309:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: annapurna_phpmyadmin
+    restart: always
+    ports:
+      - "9092:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    depends_on:
+      - db
+
+  redis:
+    image: redis:latest
+    container_name: annapurna_redis
+    ports:
+      - "6479:6379"
+
+  queue:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: annapurna_queue
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    command: php artisan queue:work
+    depends_on:
+      - app
+      - redis
+      - db
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: annapurna_mailhog
+    ports:
+      - "9025:8025" # Web UI
+      - "9026:1025" # SMTP
+
+volumes:
+  dbdata:
