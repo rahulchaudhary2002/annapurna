@@ -1282,8 +1282,8 @@ input[type="range"].budget-slider::-webkit-slider-thumb {
                 </div>
             </div>
             <div class="partner-cta-right">
-                <a href="{{ route('contact') }}" class="btn-partner btn-partner-primary">Partner with Us</a>
-                <a href="{{ route('about') }}" class="btn-partner btn-partner-outline">Learn More</a>
+                <a href="{{ route('list-a-business') }}" class="btn-partner btn-partner-primary">List Your Business</a>
+                <a href="{{ route('list-a-business') }}" class="btn-partner btn-partner-outline">Learn More</a>
             </div>
         </div>
     </div>

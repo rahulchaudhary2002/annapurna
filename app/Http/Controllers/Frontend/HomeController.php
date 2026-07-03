@@ -31,6 +31,11 @@ class HomeController extends Controller
         ));
     }
 
+    public function listABusiness(): View
+    {
+        return view('frontend.list-a-business');
+    }
+
     public function index(): View
     {
         $sliders        = Slider::active()->get();

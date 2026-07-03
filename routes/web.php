@@ -37,6 +37,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // About
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
+// List a Business
+Route::get('/list-a-business', [HomeController::class, 'listABusiness'])->name('list-a-business');
+
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 

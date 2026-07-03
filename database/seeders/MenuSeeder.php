@@ -54,9 +54,14 @@ class MenuSeeder extends Seeder
                 ],
             ],
             [
+                'title' => 'List a Business',
+                'url'   => '/list-a-business',
+                'order' => 6,
+            ],
+            [
                 'title' => 'Contact',
                 'url'   => '/contact',
-                'order' => 6,
+                'order' => 7,
             ],
         ];
 
