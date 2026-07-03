@@ -222,6 +222,27 @@
     </section>
     @endif
 
+    {{-- Map Section --}}
+    @if($business->map_embed)
+    <section class="section-padding bg-lightnav">
+        <div class="container">
+            <div class="row justify-content-center mb-30">
+                <div class="col-md-8 text-center">
+                    <div class="section-subtitle"><span>Find Us</span></div>
+                    <div class="section-title">Location &amp; <span>Map</span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="border-radius:8px;overflow:hidden;border:1px solid #e0ddd4;">
+                        {!! $business->map_embed !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
     {{-- Packages Section --}}
     @if(isset($packages) && $packages->isNotEmpty())
     <section class="tours1 section-padding bg-lightnav">
